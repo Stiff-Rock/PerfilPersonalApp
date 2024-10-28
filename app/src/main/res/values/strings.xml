@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">PerfilPersonal</string>
+
+    <string name="welcome_title">Bienvenido a tu perfil personal!</string>
+    <string name="welcome_button">Comenzar</string>
+
+    <string name="company_logo">Logotipo de la compañía</string>
+    <string name="datos_title">Introduce tus datos</string>
+    <string name="confirm_btn">Confirmar</string>
+    <string name="editText_name_hint">Nombre</string>
+    <string name="editText_age_hint">Edad</string>
+    <string name="editText_email_hint">Correo electrónico</string>
+    <string name="select_pfp">Elegir foto de perfil</string>
+    <string name="elige_una_foto">Elige una foto</string>
+    <string name="foto">Foto</string>
+
+</resources>

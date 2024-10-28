@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DatosActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="238dp"
+                app:srcCompat="@drawable/ic_launcher_background"
+                android:id="@+id/imageView2"
+                android:contentDescription="@string/company_logo"
+                android:layout_marginTop="40dp"/>
+
+        <TextView
+                android:id="@+id/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datos_title"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"/>
+
+        <EditText
+                android:id="@+id/nameText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:hint="@string/editText_name_hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColorHint="#B9FFFFFF"/>
+
+        <EditText
+                android:id="@+id/ageText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:hint="@string/editText_age_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:textColorHint="#B9FFFFFF"/>
+
+        <EditText
+                android:id="@+id/emailText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:hint="@string/editText_email_hint"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#B9FFFFFF"/>
+
+        <Button
+                android:id="@+id/choosePfp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_pfp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp" />
+
+        <Button
+                android:id="@+id/confirmDataBtn"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:text="@string/confirm_btn"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp" />
+
+    </LinearLayout>
+</ScrollView>
