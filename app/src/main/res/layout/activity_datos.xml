@@ -16,7 +16,7 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="238dp"
-                app:srcCompat="@drawable/ic_launcher_background"
+                app:srcCompat="@drawable/app_icon"
                 android:id="@+id/imageView2"
                 android:contentDescription="@string/company_logo"
                 android:layout_marginTop="40dp"/>

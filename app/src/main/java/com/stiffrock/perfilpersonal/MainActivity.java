@@ -2,6 +2,8 @@ package com.stiffrock.perfilpersonal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        View mainLayout = findViewById(R.id.main);
+        mainLayout.setBackgroundColor(AppConfig.selectedColor);
+
         Button welcomeButton = findViewById(R.id.startBtn);
         welcomeButton.setOnClickListener(e -> loadDatosActivity());
     }
@@ -30,5 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadDatosActivity() {
         Intent intent = new Intent(MainActivity.this, DatosActivity.class);
         startActivity(intent);
+        Log.d(AppConfig.TAG, "DatosActivity activada");
     }
 }

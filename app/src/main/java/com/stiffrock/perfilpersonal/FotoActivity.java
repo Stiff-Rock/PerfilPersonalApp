@@ -2,6 +2,8 @@ package com.stiffrock.perfilpersonal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -15,6 +17,7 @@ public class FotoActivity extends AppCompatActivity {
     private ImageView pfpImageView;
     private final ImageView[] pictures = new ImageView[8];
     private final int[] pictureResources = {R.drawable.fnaf, R.drawable.godot, R.drawable.cookie, R.drawable.play, R.drawable.terr, R.drawable.wii, R.drawable.pollo, R.drawable.persona};
+    private int selectedPfpResource = R.drawable.fnaf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,10 @@ public class FotoActivity extends AppCompatActivity {
             return insets;
         });
 
-        pfpImageView = findViewById(R.id.pfpImageView);
+        View mainLayout = findViewById(R.id.main);
+        mainLayout.setBackgroundColor(AppConfig.selectedColor);
 
+        pfpImageView = findViewById(R.id.pfpImageView);
 
         pictures[0] = findViewById(R.id.imageView1);
         pictures[1] = findViewById(R.id.imageView2);
@@ -46,14 +51,29 @@ public class FotoActivity extends AppCompatActivity {
 
         Button confirmDataBtn = findViewById(R.id.confirmDataBtn);
         confirmDataBtn.setOnClickListener(e -> backToDatosActivity());
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            selectedPfpResource = bundle.getInt("pfpImage");
+            pfpImageView.setImageResource(selectedPfpResource);
+        }
     }
 
     private void changePfp(int index) {
-        pfpImageView.setImageResource(pictureResources[index]);
+        selectedPfpResource = pictureResources[index];
+        pfpImageView.setImageResource(selectedPfpResource);
     }
 
     private void backToDatosActivity() {
         Intent intent = new Intent(FotoActivity.this, DatosActivity.class);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            bundle.putInt("pfpImage", selectedPfpResource);
+            intent.putExtras(bundle);
+        }
+
         startActivity(intent);
+        Log.d(AppConfig.TAG, "DatosActivity activada");
     }
 }

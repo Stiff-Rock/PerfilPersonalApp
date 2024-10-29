@@ -2,9 +2,11 @@ package com.stiffrock.perfilpersonal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class DatosActivity extends AppCompatActivity {
+    private EditText nameET;
+    private EditText ageET;
+    private EditText emailET;
+    private int pfpImageResource = R.drawable.fnaf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,30 +31,69 @@ public class DatosActivity extends AppCompatActivity {
             return insets;
         });
 
+        View mainLayout = findViewById(R.id.main);
+        mainLayout.setBackgroundColor(AppConfig.selectedColor);
+
+        nameET = findViewById(R.id.nameText);
+        ageET = findViewById(R.id.ageText);
+        emailET = findViewById(R.id.emailText);
+
         Button choosePfp = findViewById(R.id.choosePfp);
-        choosePfp.setOnClickListener(e -> {
-            openFotoActivity();
-        });
+        choosePfp.setOnClickListener(e -> openFotoActivity());
 
         Button confirmDataBtn = findViewById(R.id.confirmDataBtn);
-        confirmDataBtn.setOnClickListener(e -> {
-            openResumenActivity();
-        });
+        confirmDataBtn.setOnClickListener(e -> openResumenActivity());
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            nameET.setText(bundle.getString("name"));
+            ageET.setText(bundle.getString("age"));
+            emailET.setText(bundle.getString("email"));
+            pfpImageResource = bundle.getInt("pfpImage");
+        }
     }
 
-
     private void openFotoActivity() {
+        String name = nameET.getText().toString();
+        String age = ageET.getText().toString();
+        String email = emailET.getText().toString();
+
         Intent intent = new Intent(DatosActivity.this, FotoActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        bundle.putString("age", age);
+        bundle.putString("email", email);
+        bundle.putInt("pfpImage", pfpImageResource);
+
+        intent.putExtras(bundle);
         startActivity(intent);
+
+        Log.d(AppConfig.TAG, "FotoActivity activada");
     }
 
     private void openResumenActivity() {
-        String name = ((EditText) findViewById(R.id.nameText)).getText().toString();
-        String age = ((EditText) findViewById(R.id.ageText)).getText().toString();
-        String email = ((EditText) findViewById(R.id.emailText)).getText().toString();
+        String name = nameET.getText().toString();
+        String age = ageET.getText().toString();
+        String email = emailET.getText().toString();
 
-        System.out.println(name);
-        System.out.println(age);
-        System.out.println(email);
+        if (name.isBlank() || age.isBlank() || email.isBlank()) {
+            Toast.makeText(this, "Porfavor rellena todos los datos",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(DatosActivity.this, ResumenActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        bundle.putString("age", age);
+        bundle.putString("email", email);
+        bundle.putInt("pfpImage", pfpImageResource);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+        Log.d(AppConfig.TAG, "ResumenActivity activada");
     }
 }

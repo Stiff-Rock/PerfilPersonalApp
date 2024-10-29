@@ -13,5 +13,11 @@
     <string name="select_pfp">Elegir foto de perfil</string>
     <string name="elige_una_foto">Elige una foto</string>
     <string name="foto">Foto</string>
+    <string name="perfil_personal">Perfil Personal</string>
+    <string name="resetear">Resetear</string>
+    <string name="cambiar_dise_o">Cambiar diseño</string>
+    <string name="dise_o">Diseño</string>
+    <string name="tama_o_de_los_botones">Tamaño de los botones</string>
+    <string name="color_de_fondo">Color de fondo</string>
 
 </resources>
