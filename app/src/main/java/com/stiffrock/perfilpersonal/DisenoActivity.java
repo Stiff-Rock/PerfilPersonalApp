@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 
 import androidx.activity.EdgeToEdge;
@@ -15,7 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class DisenoActivity extends AppCompatActivity {
-    private View mainLayout;
+    private ViewGroup mainLayout;
     private SeekBar redSeekBar;
     private SeekBar greenSeekBar;
     private SeekBar blueSeekBar;
@@ -30,8 +31,10 @@ public class DisenoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         mainLayout = findViewById(R.id.main);
         mainLayout.setBackgroundColor(AppConfig.selectedColor);
+        AppConfig.setDefaultButtonDimensions(mainLayout);
 
         redSeekBar = findViewById(R.id.seekBarRed);
         greenSeekBar = findViewById(R.id.seekBarGreen);
@@ -41,6 +44,15 @@ public class DisenoActivity extends AppCompatActivity {
 
         Button confirmBtn = findViewById(R.id.confirmBtn);
         confirmBtn.setOnClickListener(e -> backToResumenActivity());
+
+        NumberPicker numberPicker = findViewById(R.id.numberPicker);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(100);
+        numberPicker.setValue(AppConfig.buttonTextSize);
+        numberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            AppConfig.buttonTextSize = newVal;
+            AppConfig.setDefaultButtonDimensions(mainLayout);
+        });
     }
 
     private void initializeSeekBarListeners() {
@@ -110,7 +122,6 @@ public class DisenoActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-
             intent.putExtras(bundle);
         }
 

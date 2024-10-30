@@ -3,7 +3,7 @@ package com.stiffrock.perfilpersonal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    private ViewGroup mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +26,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        View mainLayout = findViewById(R.id.main);
+        mainLayout = findViewById(R.id.main);
         mainLayout.setBackgroundColor(AppConfig.selectedColor);
+        AppConfig.setDefaultButtonDimensions(mainLayout);
 
         Button welcomeButton = findViewById(R.id.startBtn);
         welcomeButton.setOnClickListener(e -> loadDatosActivity());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppConfig.setDefaultButtonDimensions(mainLayout);
     }
 
     private void loadDatosActivity() {

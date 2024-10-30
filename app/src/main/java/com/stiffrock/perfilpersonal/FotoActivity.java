@@ -3,7 +3,7 @@ package com.stiffrock.perfilpersonal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -18,6 +18,7 @@ public class FotoActivity extends AppCompatActivity {
     private final ImageView[] pictures = new ImageView[8];
     private final int[] pictureResources = {R.drawable.fnaf, R.drawable.godot, R.drawable.cookie, R.drawable.play, R.drawable.terr, R.drawable.wii, R.drawable.pollo, R.drawable.persona};
     private int selectedPfpResource = R.drawable.fnaf;
+    private ViewGroup mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,9 @@ public class FotoActivity extends AppCompatActivity {
             return insets;
         });
 
-        View mainLayout = findViewById(R.id.main);
+        mainLayout = findViewById(R.id.main);
         mainLayout.setBackgroundColor(AppConfig.selectedColor);
+        AppConfig.setDefaultButtonDimensions(mainLayout);
 
         pfpImageView = findViewById(R.id.pfpImageView);
 
@@ -57,6 +59,12 @@ public class FotoActivity extends AppCompatActivity {
             selectedPfpResource = bundle.getInt("pfpImage");
             pfpImageView.setImageResource(selectedPfpResource);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppConfig.setDefaultButtonDimensions(mainLayout);
     }
 
     private void changePfp(int index) {

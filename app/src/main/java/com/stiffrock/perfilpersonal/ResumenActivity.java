@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +23,7 @@ public class ResumenActivity extends AppCompatActivity {
     private TextView email;
     private ImageView pfpImageView;
     private int imageResource;
+    private ViewGroup mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,9 @@ public class ResumenActivity extends AppCompatActivity {
             return insets;
         });
 
-        View mainLayout = findViewById(R.id.main);
+        mainLayout = findViewById(R.id.main);
         mainLayout.setBackgroundColor(AppConfig.selectedColor);
+        AppConfig.setDefaultButtonDimensions(mainLayout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +57,12 @@ public class ResumenActivity extends AppCompatActivity {
             imageResource = bundle.getInt("pfpImage");
             pfpImageView.setImageResource(imageResource);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppConfig.setDefaultButtonDimensions(mainLayout);
     }
 
     @Override
